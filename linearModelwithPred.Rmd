@@ -14,12 +14,41 @@ knitr::opts_chunk$set(echo = TRUE)
 data <- read.csv(file="https://onlinestatbook.com/case_studies_rvls/physical_strength/data.txt",sep="",header=TRUE) 
 ```
 
-```{r}
-Model1 = lm(SIMS~ARM, data = data)
-print(summary(Model1))
-```
+
+## Model1
+find an equation that expresses SIMS as a function of ARM
+
+## Results
+
+### Graphical Results
 
 ```{r}
-plot(data$SIMS,data$ARM)
+plot(SIMS~ARM,data=data)
 ```
 
+AS arm strength increases, sim score increases.   There is a positive trend between arm strength and sim score. 
+
+### Numerical Results
+
+
+```{r}
+cor(data$SIMS, data$ARM)
+```
+we have a positive correlation, with noise.
+
+
+### inference 
+
+```{r}
+model1 <- lm(SIMS~ARM,data=data)
+summary.lm(model1)
+```
+
+
+```{r}
+model1 <- lm(SIMS~ARM,data=data)
+plot(data$SIMS~data$ARM)
+abline(model1, col='red')
+```
+
+for an increase of 1 in arm strength, sim score increases by 0.0545
